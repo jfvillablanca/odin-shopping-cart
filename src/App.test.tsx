@@ -1,5 +1,9 @@
-import { describe } from "vitest"
+import { render } from "@testing-library/react";
+import { describe, test } from "vitest";
+import Nav from "./Nav";
 
-describe.todo("Nav tests", () => {
-    //
-})
+describe("Nav tests", () => {
+    test("renders without crashing", () => {
+        render(<Nav />);
+    });
+});
