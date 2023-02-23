@@ -3,7 +3,7 @@ import Nav from "./Nav";
 
 function App() {
     return (
-        <div className='App'>
+        <div className='App h-screen w-screen'>
             <Nav />
         </div>
     );
