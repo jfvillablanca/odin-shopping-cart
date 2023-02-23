@@ -1,5 +1,7 @@
-import { render } from "@testing-library/react";
-import { describe, test } from "vitest";
+import { render, screen } from "@testing-library/react";
+import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import { describe, expect, test } from "vitest";
+import createRouterConfig from "../routerConfig";
 import App from "../routes/App";
 import Home from "../routes/Home";
 import Nav from "../routes/Nav";
@@ -10,6 +12,15 @@ describe("App tests", () => {
         render(<App />);
     });
 
+    test("renders home page by default", () => {
+        const router = createMemoryRouter(createRouterConfig(), {
+            initialEntries: ["/"],
+        });
+        render(<RouterProvider router={router} />);
+
+        expect(
+            screen.getByRole("heading", { name: /you are home/i })
+        ).toBeInTheDocument();
     });
 });
 
