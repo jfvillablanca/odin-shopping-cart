@@ -13,11 +13,11 @@ export default function createRouterConfig() {
                     element: <Home />,
                 },
                 {
-                    path: "home/",
+                    path: "/home",
                     element: <Home />,
                 },
                 {
-                    path: "shop/",
+                    path: "/shop",
                     element: <Shop />,
                 },
             ],
