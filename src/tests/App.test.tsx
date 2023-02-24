@@ -28,6 +28,13 @@ describe("App tests", () => {
         ).toBeInTheDocument();
     });
 
+    test("navigates to a 404 page on a bad route", () => {
+        renderWithRouter(<App />, { route: "/non-existent-page" });
+
+        expect(
+            screen.getByRole("heading", { name: /404: page not found/i })
+        ).toBeInTheDocument();
+    });
 });
 
 describe("Nav tests", () => {
