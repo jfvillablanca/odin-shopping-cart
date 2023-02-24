@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { describe, expect, test } from "vitest";
+import userEvent from "@testing-library/user-event";
 import App from "../routes/App";
 import Home from "../routes/Home";
 import Nav from "../routes/Nav";
@@ -25,6 +26,30 @@ describe("App tests", () => {
 
         expect(
             screen.getByRole("heading", { name: /you are home/i })
+        ).toBeInTheDocument();
+    });
+
+    test("navigates to home page when Home link is clicked", async () => {
+        renderWithRouter(<App />, { route: "/shop" });
+
+        const user = userEvent.setup();
+        const linkToHome = screen.getByRole("link", { name: /home/i });
+        await user.click(linkToHome);
+
+        expect(
+            screen.getByRole("heading", { name: /you are home/i })
+        ).toBeInTheDocument();
+    });
+
+    test("navigates to shop page when Shop link is clicked", async () => {
+        renderWithRouter(<App />, { route: "/" });
+
+        const user = userEvent.setup();
+        const linkToShop = screen.getByRole("link", { name: /shop/i });
+        await user.click(linkToShop);
+
+        expect(
+            screen.getByRole("heading", { name: /time to shop/i })
         ).toBeInTheDocument();
     });
 
