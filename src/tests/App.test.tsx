@@ -26,15 +26,13 @@ describe("App tests", () => {
     });
 
     test("renders home page by default", () => {
-        const router = createMemoryRouter(createRouterConfig(), {
-            initialEntries: ["/"],
-        });
-        render(<RouterProvider router={router} />);
+        renderWithRouter(<App />);
 
         expect(
             screen.getByRole("heading", { name: /you are home/i })
         ).toBeInTheDocument();
     });
+
 });
 
 describe("Nav tests", () => {
