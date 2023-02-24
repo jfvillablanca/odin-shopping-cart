@@ -11,9 +11,18 @@ import Home from "../routes/Home";
 import Nav from "../routes/Nav";
 import Shop from "../routes/Shop";
 
+const renderWithRouter = (ui: React.ReactElement, { route = "/" } = {}) => {
+    window.history.pushState({}, "Test page", route);
+
+    return {
+        user: userEvent.setup(),
+        ...render(ui, { wrapper: BrowserRouter }),
+    };
+};
+
 describe("App tests", () => {
     test("renders without crashing", () => {
-        render(<App />, { wrapper: BrowserRouter });
+        renderWithRouter(<App />);
     });
 
     test("renders home page by default", () => {
@@ -30,7 +39,7 @@ describe("App tests", () => {
 
 describe("Nav tests", () => {
     test("renders without crashing", () => {
-        render(<Nav />, { wrapper: BrowserRouter });
+        renderWithRouter(<Nav />);
     });
 });
 
