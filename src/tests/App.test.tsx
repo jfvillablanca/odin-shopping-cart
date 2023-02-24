@@ -70,12 +70,12 @@ describe("Nav tests", () => {
 
 describe("Home tests", () => {
     test("renders without crashing", () => {
-        render(<Home />);
+        renderWithRouter(<Home />);
     });
 });
 
 describe("Shop tests", () => {
     test("renders without crashing", () => {
-        render(<Shop />);
+        renderWithRouter(<Shop />);
     });
 });
