@@ -1,5 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import { createMemoryRouter, RouterProvider } from "react-router-dom";
+import {
+    BrowserRouter,
+    createMemoryRouter,
+    RouterProvider,
+} from "react-router-dom";
 import { describe, expect, test } from "vitest";
 import createRouterConfig from "../routerConfig";
 import App from "../routes/App";
@@ -9,7 +13,7 @@ import Shop from "../routes/Shop";
 
 describe("App tests", () => {
     test("renders without crashing", () => {
-        render(<App />);
+        render(<App />, { wrapper: BrowserRouter });
     });
 
     test("renders home page by default", () => {
@@ -26,7 +30,7 @@ describe("App tests", () => {
 
 describe("Nav tests", () => {
     test("renders without crashing", () => {
-        render(<Nav />);
+        render(<Nav />, { wrapper: BrowserRouter });
     });
 });
 
