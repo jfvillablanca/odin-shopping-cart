@@ -7,12 +7,12 @@ function RouteSwitch() {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<App />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="/shop" element={<Shop />} />
+                <Route path='/' element={<App />} />
+                <Route path='/home' element={<Home />} />
+                <Route path='/shop' element={<Shop />} />
             </Routes>
         </BrowserRouter>
-    )
+    );
 }
 
-export default RouteSwitch
+export default RouteSwitch;
