@@ -1,13 +1,18 @@
-import { Outlet } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "../styles/App.css";
-import Nav from "./Nav";
+import Home from "./Home";
+import Root from "./Root";
+import Shop from "./Shop";
 
 function App() {
     return (
-        <div className='App h-screen w-screen'>
-            <Nav />
-            <Outlet />
-        </div>
+        <Routes>
+            <Route path='/' element={<Root />}>
+                <Route index element={<Home />} />
+                <Route path='home' element={<Home />} />
+                <Route path='shop' element={<Shop />} />
+            </Route>
+        </Routes>
     );
 }
 
