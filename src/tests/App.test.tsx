@@ -1,11 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import {
-    BrowserRouter,
-    createMemoryRouter,
-    RouterProvider,
-} from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { describe, expect, test } from "vitest";
-import createRouterConfig from "../routerConfig";
 import App from "../routes/App";
 import Home from "../routes/Home";
 import Nav from "../routes/Nav";
