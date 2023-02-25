@@ -12,6 +12,7 @@ type ProductData = {
 
 function Shop() {
     const [productData, setProductData] = useState<ProductData[]>([]);
+    const cardRenderLimit = 16;
 
     useEffect(() => {
         const getProducts = async () => {
@@ -38,13 +39,13 @@ function Shop() {
     }, []);
 
     const loadTheSpinners = () => {
-        return Array.from({ length: 8 }).map(() => (
+        return Array.from({ length: cardRenderLimit }).map(() => (
             <ProductCard key={nanoid()} />
         ));
     };
 
     const loadTheProductData = () => {
-        return productData.map((product) => (
+        return productData.slice(0, cardRenderLimit).map((product) => (
             <ProductCard
                 key={product.id + nanoid()}
                 title={product.title}
