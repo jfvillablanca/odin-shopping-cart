@@ -8,7 +8,7 @@ type ProductData = {
     price: string | number;
     description: string;
     images: string[];
-}
+};
 
 function Shop() {
     const [productData, setProductData] = useState<ProductData[]>([]);
@@ -45,8 +45,8 @@ function Shop() {
 
     const loadTheProductData = () => {
         return productData.map((product) => (
-            <ProductCard 
-                key={product.id + nanoid()} 
+            <ProductCard
+                key={product.id + nanoid()}
                 title={product.title}
                 price={product.price}
                 description={product.description}
