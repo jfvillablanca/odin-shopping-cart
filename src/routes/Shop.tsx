@@ -1,8 +1,8 @@
 function Shop() {
     return (
-        <nav>
-            <h2>Shop</h2>
-        </nav>
+        <main>
+            <h2>Browse our catalog</h2>
+        </main>
     );
 }
 
