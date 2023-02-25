@@ -5,10 +5,7 @@ function Shop() {
     const [productData, setProductData] = useState([]);
 
     const loadTheSpinners = () => {
-        const spinners = Array.from({ length: 8 }).map(() => (
-            <ProductCardSpinner key={nanoid()} />
-        ));
-        return spinners;
+        return Array.from({ length: 8 }).map(() => <ProductCard />);
     };
 
     const loadTheProductData = () => {
@@ -29,12 +26,26 @@ function Shop() {
 
 export default Shop;
 
-function ProductCardSpinner() {
+type ProductCardType = {
+    id?: string;
+    imgsrc?: string;
+    title?: string;
+    price?: string | number;
+    description?: string;
+};
+
+function ProductCard({
+    id = nanoid(),
+    imgsrc = SpinnerImg,
+    title = "Loading...",
+    price = "",
+    description = "Loading...",
+}: ProductCardType) {
     return (
-        <div>
-            <img src={SpinnerImg} alt='Loading...' />
-            <h2 role='status'>Loading...</h2>
-            <h3></h3>
+        <div key={id}>
+            <img src={imgsrc} alt={description} />
+            <h2>{title}</h2>
+            <h3>{price ? `$ ${price}` : " "}</h3>
         </div>
     );
 }
