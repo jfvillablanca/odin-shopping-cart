@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import App from "../routes/App";
 import Home from "../routes/Home";
@@ -15,6 +15,12 @@ const renderWithRouter = (ui: React.ReactElement, { route = "/" } = {}) => {
         ...render(ui, { wrapper: BrowserRouter }),
     };
 };
+
+global.fetch = vi.fn();
+
+function createFetchResponse<T>(data: T) {
+    return { json: () => new Promise((resolve) => resolve(data)) };
+}
 
 describe("App tests", () => {
     test("renders without crashing", () => {
