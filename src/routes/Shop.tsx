@@ -56,9 +56,9 @@ function Shop() {
     };
 
     return (
-        <main>
-            <h2>Browse our catalog</h2>
-            <div>
+        <main className='h-full py-4 px-20'>
+            <h2 className='mb-6 uppercase'>Browse our catalog</h2>
+            <div className='flex flex-wrap gap-9 pr-32'>
                 {productData.length === 0
                     ? loadTheSpinners()
                     : loadTheProductData()}
@@ -89,6 +89,7 @@ function ProductCard({
         <div
             role={role}
             id={id}
+            className='flex flex-col w-40 h-52 p-2 bg-blue-400'
         >
             <img src={imgsrc} alt={description} />
             <h2>{title}</h2>
