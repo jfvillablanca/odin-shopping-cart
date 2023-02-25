@@ -1,4 +1,4 @@
-import { act, render, screen } from "@testing-library/react";
+import { act, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
@@ -100,4 +100,41 @@ describe("Shop tests", () => {
         expect(screen.getAllByRole("status")).toHaveLength(8);
     });
 
+    test("renders the product card after receiving data", () => {
+        const mockData = [
+            {
+                id: 4,
+                title: "Handmade Fresh Table",
+                price: 687,
+                description: "Andy shoes are designed to keeping in...",
+                category: {
+                    id: 5,
+                    name: "Others",
+                    image: "https://placeimg.com/640/480/any?r=0.591926261873231",
+                },
+                images: [
+                    "https://placeimg.com/640/480/any?r=0.9178516507833767",
+                    "https://placeimg.com/640/480/any?r=0.9300320592588625",
+                    "https://placeimg.com/640/480/any?r=0.8807778235430017",
+                ],
+            },
+        ];
+
+        (fetch as jest.Mock).mockResolvedValue(createFetchResponse(mockData));
+        act(async () => {
+            renderWithRouter(<Shop />);
+
+            await waitFor(() => {
+                expect(
+                    screen.getByAltText(/Andy shoes are designed/i)
+                ).toBeInTheDocument();
+                expect(screen.getByRole("article")).toHaveLength(1);
+                expect(
+                    screen.getByRole("heading", {
+                        name: /handmade fresh table/i,
+                    })
+                ).toBeInTheDocument();
+            });
+        });
+    });
 });
