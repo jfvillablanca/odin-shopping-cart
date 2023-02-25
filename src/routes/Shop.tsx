@@ -20,7 +20,15 @@ function Shop() {
     };
 
     const loadTheProductData = () => {
-        return <></>;
+        return productData.map((product) => (
+            <ProductCard 
+                key={product.id + nanoid()} 
+                title={product.title}
+                price={product.price}
+                description={product.description}
+                imgsrc={product.images[0]}
+            />
+        ));
     };
 
     return (
