@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import SpinnerImg from "../assets/spinner.svg";
 
@@ -12,6 +13,29 @@ type ProductData = {
 function Shop() {
     const [productData, setProductData] = useState<ProductData[]>([]);
 
+    useEffect(() => {
+        const getProducts = async () => {
+            const resp = await fetch(
+                "https://api.escuelajs.co/api/v1/products"
+            );
+            const data = await resp.json();
+
+            setProductData((prevProductData) => {
+                const selectedProductFields: ProductData[] = Array.isArray(data)
+                    ? data.map((product: ProductData) => ({
+                          id: product.id,
+                          title: product.title,
+                          price: product.price,
+                          description: product.description,
+                          images: [...product.images],
+                      }))
+                    : [];
+
+                return prevProductData.concat(selectedProductFields);
+            });
+        };
+        getProducts();
+    }, []);
 
     const loadTheSpinners = () => {
         return Array.from({ length: 8 }).map(() => (
