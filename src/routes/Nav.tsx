@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import ShoppingBag from "../assets/ShoppingBag";
 
 function Nav() {
     return (
@@ -12,7 +13,9 @@ function Nav() {
                     <Link to='/shop'>Shop</Link>
                 </li>
             </ul>
-            <button>Add to Cart</button>
+            <div role='button'>
+                <ShoppingBag className='text-amber-500' />
+            </div>
         </nav>
     );
 }
