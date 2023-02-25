@@ -49,7 +49,7 @@ describe("App tests", () => {
         await user.click(linkToShop);
 
         expect(
-            screen.getByRole("heading", { name: /time to shop/i })
+            screen.getByRole("heading", { name: /browse our catalog/i })
         ).toBeInTheDocument();
     });
 
