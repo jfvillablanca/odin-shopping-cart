@@ -12,8 +12,11 @@ type ProductData = {
 function Shop() {
     const [productData, setProductData] = useState<ProductData[]>([]);
 
+
     const loadTheSpinners = () => {
-        return Array.from({ length: 8 }).map(() => <ProductCard />);
+        return Array.from({ length: 8 }).map(() => (
+            <ProductCard key={nanoid()} />
+        ));
     };
 
     const loadTheProductData = () => {
