@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
@@ -36,7 +36,10 @@ describe("App tests", () => {
     });
 
     test("navigates to home page when Home link is clicked", async () => {
-        renderWithRouter(<App />, { route: "/shop" });
+        (fetch as jest.Mock).mockResolvedValue(createFetchResponse({}));
+        act(() => {
+            renderWithRouter(<App />, { route: "/shop" });
+        });
 
         const user = userEvent.setup();
         const linkToHome = screen.getByRole("link", { name: /home/i });
@@ -82,6 +85,9 @@ describe("Home tests", () => {
 
 describe("Shop tests", () => {
     test("renders without crashing", () => {
-        renderWithRouter(<Shop />);
+        (fetch as jest.Mock).mockResolvedValue(createFetchResponse({}));
+        act(() => {
+            renderWithRouter(<Shop />);
+        });
     });
 });
