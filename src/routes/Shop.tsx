@@ -1,8 +1,16 @@
 import { nanoid } from "nanoid";
 import SpinnerImg from "../assets/spinner.svg";
 
+type ProductData = {
+    id: string | number;
+    title: string;
+    price: string | number;
+    description: string;
+    images: string[];
+}
+
 function Shop() {
-    const [productData, setProductData] = useState([]);
+    const [productData, setProductData] = useState<ProductData[]>([]);
 
     const loadTheSpinners = () => {
         return Array.from({ length: 8 }).map(() => <ProductCard />);
