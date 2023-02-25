@@ -90,4 +90,14 @@ describe("Shop tests", () => {
             renderWithRouter(<Shop />);
         });
     });
+
+    test("renders a loading indicator if fetch is in progress", () => {
+        (fetch as jest.Mock).mockResolvedValue(createFetchResponse({}));
+        act(() => {
+            renderWithRouter(<Shop />);
+        });
+
+        expect(screen.getAllByRole("status")).toHaveLength(8);
+    });
+
 });
