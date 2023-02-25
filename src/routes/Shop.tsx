@@ -84,8 +84,12 @@ function ProductCard({
     price = "",
     description = "Loading...",
 }: ProductCardType) {
+    const role = title !== "Loading..." ? "article" : "status";
     return (
-        <div key={id}>
+        <div
+            role={role}
+            id={id}
+        >
             <img src={imgsrc} alt={description} />
             <h2>{title}</h2>
             <h3>{price ? `$ ${price}` : " "}</h3>
