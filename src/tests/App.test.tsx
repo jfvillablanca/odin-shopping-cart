@@ -102,7 +102,7 @@ describe("Shop tests", () => {
         expect(screen.getAllByRole("status")).toHaveLength(8);
     });
 
-    test("renders the product card after receiving data", () => {
+    test("renders the product card after receiving data", async () => {
         const mockData = [
             {
                 id: 4,
@@ -123,20 +123,22 @@ describe("Shop tests", () => {
         ];
 
         (fetch as jest.Mock).mockResolvedValue(createFetchResponse(mockData));
-        act(async () => {
+        act(() => {
             renderWithRouter(<Shop />);
-
-            await waitFor(() => {
-                expect(
-                    screen.getByAltText(/Andy shoes are designed/i)
-                ).toBeInTheDocument();
-                expect(screen.getByRole("article")).toHaveLength(1);
-                expect(
-                    screen.getByRole("heading", {
-                        name: /handmade fresh table/i,
-                    })
-                ).toBeInTheDocument();
-            });
         });
+
+        const productImage = await screen.findByAltText(
+            /Andy shoes are designed/i
+        );
+        const productTitle = await screen.findByRole("heading", {
+            name: /handmade fresh table/i,
+        });
+        const productPrice = await screen.findByText(/687/);
+        const productCards = await screen.findAllByRole("article");
+
+        expect(productImage).toBeInTheDocument();
+        expect(productTitle).toBeInTheDocument();
+        expect(productPrice).toBeInTheDocument();
+        expect(productCards).toHaveLength(1);
     });
 });
