@@ -19,3 +19,10 @@ function Root() {
 }
 
 export default Root;
+
+type ItemInCheckout = {
+    id: string;
+    title: string;
+    quantity: number;
+    price: number;
+};
