@@ -84,7 +84,7 @@ describe("App tests", () => {
 
 describe("Nav tests", () => {
     test("renders without crashing", () => {
-        renderWithRouter(<Nav />);
+        renderWithRouter(<Nav handleClick={() => void 0}/>);
     });
 });
 
