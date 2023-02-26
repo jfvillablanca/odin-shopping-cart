@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { nanoid } from "nanoid";
 import SpinnerImg from "../assets/spinner.svg";
 
@@ -10,33 +9,8 @@ type ProductData = {
     images: string[];
 };
 
-function Shop() {
-    const [productData, setProductData] = useState<ProductData[]>([]);
+function Shop({ productData }: { productData: ProductData[] }) {
     const cardRenderLimit = 16;
-
-    useEffect(() => {
-        const getProducts = async () => {
-            const resp = await fetch(
-                "https://api.escuelajs.co/api/v1/products"
-            );
-            const data = await resp.json();
-
-            setProductData((prevProductData) => {
-                const selectedProductFields: ProductData[] = Array.isArray(data)
-                    ? data.map((product: ProductData) => ({
-                          id: product.id,
-                          title: product.title,
-                          price: product.price,
-                          description: product.description,
-                          images: [...product.images],
-                      }))
-                    : [];
-
-                return prevProductData.concat(selectedProductFields);
-            });
-        };
-        getProducts();
-    }, []);
 
     const loadTheSpinners = () => {
         return Array.from({ length: cardRenderLimit }).map(() => (
@@ -45,15 +19,17 @@ function Shop() {
     };
 
     const loadTheProductData = () => {
-        return productData.slice(0, cardRenderLimit).map((product) => (
-            <ProductCard
-                key={product.id + nanoid()}
-                title={product.title}
-                price={product.price}
-                description={product.description}
-                imgsrc={product.images[0]}
-            />
-        ));
+        return productData
+            .slice(0, cardRenderLimit)
+            .map((product) => (
+                <ProductCard
+                    key={product.id + nanoid()}
+                    title={product.title}
+                    price={product.price}
+                    description={product.description}
+                    imgsrc={product.images[0]}
+                />
+            ));
     };
 
     return (
