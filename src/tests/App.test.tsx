@@ -69,6 +69,17 @@ describe("App tests", () => {
             screen.getByRole("heading", { name: /404: page not found/i })
         ).toBeInTheDocument();
     });
+
+    test("check if shopping bag is hidden by default", async () => {
+        renderWithRouter(<App />);
+        const shoppingBagSidebar = await screen.findByRole("complementary", {
+            hidden: true,
+        });
+
+        expect(shoppingBagSidebar).toBeInTheDocument();
+        expect(shoppingBagSidebar).toHaveAttribute("hidden");
+    });
+
 });
 
 describe("Nav tests", () => {
