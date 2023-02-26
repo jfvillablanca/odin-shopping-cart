@@ -23,6 +23,8 @@ function createFetchResponse<T>(data: T) {
 }
 
 describe("App tests", () => {
+    afterEach(cleanup);
+
     test("renders without crashing", () => {
         renderWithRouter(<App />);
     });
