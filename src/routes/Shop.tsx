@@ -57,14 +57,14 @@ function Shop() {
     };
 
     return (
-        <main className='h-full py-4 px-20'>
+        <div className='h-full py-4 px-20'>
             <h2 className='mb-6 uppercase'>Browse our catalog</h2>
             <div className='flex flex-wrap gap-9 pr-32'>
                 {productData.length === 0
                     ? loadTheSpinners()
                     : loadTheProductData()}
             </div>
-        </main>
+        </div>
     );
 }
 

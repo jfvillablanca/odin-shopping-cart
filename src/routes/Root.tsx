@@ -11,7 +11,9 @@ function Root() {
     return (
         <div className='h-screen w-screen'>
             <Nav handleClick={handleBagIconClick} />
-            <Outlet />
+            <main className='relative'>
+                <Outlet />
+            </main>
         </div>
     );
 }
