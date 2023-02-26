@@ -10,7 +10,7 @@ function Root() {
 
     return (
         <div className='h-screen w-screen'>
-            <Nav isBagOpen={isBagOpen} handleClick={handleBagIconClick} />
+            <Nav handleClick={handleBagIconClick} />
             <Outlet />
         </div>
     );
