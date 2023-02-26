@@ -99,7 +99,7 @@ describe("Shop tests", () => {
             renderWithRouter(<Shop />);
         });
 
-        expect(screen.getAllByRole("status")).toHaveLength(8);
+        expect(screen.getAllByRole("status")).toHaveLength(16);
     });
 
     test("renders the product card after receiving data", async () => {
