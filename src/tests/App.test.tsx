@@ -70,9 +70,9 @@ describe("App tests", () => {
         ).toBeInTheDocument();
     });
 
-    test("check if shopping bag is hidden by default", async () => {
+    test("check if shopping bag is hidden by default", () => {
         renderWithRouter(<App />);
-        const shoppingBagSidebar = await screen.findByRole("complementary", {
+        const shoppingBagSidebar = screen.getByRole("complementary", {
             hidden: true,
         });
 
