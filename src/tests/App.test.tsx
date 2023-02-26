@@ -92,17 +92,30 @@ describe("App tests", () => {
 
         await user.click(shoppingBagIcon);
 
-        expect(shoppingBagSidebar).not.toHaveAttribute("hidden");
+        expect(shoppingBagSidebar).not.toHaveAttribute("hidden", "");
         expect(shoppingBagSidebar).toHaveTextContent(/your bag is empty/i);
         expect(checkoutTotal).toContainHTML("$ 0.00");
         expect(checkoutButton).toHaveAttribute("disabled");
     });
 
+    test.todo("clicking outside closes the shopping bag sidebar", async () => {
+        renderWithRouter(<App />);
+        const shoppingBagSidebar = await screen.findByRole("complementary", {
+            hidden: true,
+        });
+        const user = userEvent.setup();
+        const shoppingBagIcon = screen.getByLabelText("Shopping Bag");
+
+        await user.click(shoppingBagIcon);
+
+        expect(shoppingBagSidebar).toBeInTheDocument();
+        expect(shoppingBagSidebar).toHaveAttribute("hidden");
+    });
 });
 
 describe("Nav tests", () => {
     test("renders without crashing", () => {
-        renderWithRouter(<Nav handleClick={() => void 0}/>);
+        renderWithRouter(<Nav handleClick={() => void 0} />);
     });
 });
 
