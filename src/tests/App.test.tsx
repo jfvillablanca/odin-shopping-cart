@@ -1,6 +1,6 @@
 import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { describe, expect, test, vi } from "vitest";
+import { beforeEach, describe, expect, test, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 import App from "../routes/App";
 import Home from "../routes/Home";
@@ -74,6 +74,7 @@ describe("App tests", () => {
 
     test("check if shopping bag is hidden by default", () => {
         renderWithRouter(<App />);
+
         const shoppingBagSidebar = screen.getByRole("complementary", {
             hidden: true,
         });
@@ -128,26 +129,27 @@ describe("Home tests", () => {
 });
 
 describe("Shop tests", () => {
-    afterEach(cleanup);
+    type ProductData = {
+        id: string | number;
+        title: string;
+        price: string | number;
+        description: string;
+        images: string[];
+    };
 
-    test("renders without crashing", () => {
-        (fetch as jest.Mock).mockResolvedValue(createFetchResponse({}));
-        act(() => {
-            renderWithRouter(<Shop />);
-        });
-    });
+    type APIData = {
+        id: string | number;
+        title: string;
+        price: string | number;
+        description: string;
+        category: unknown;
+        images: string[];
+    };
 
-    test("renders a loading indicator if fetch is in progress", () => {
-        (fetch as jest.Mock).mockResolvedValue(createFetchResponse({}));
-        act(() => {
-            renderWithRouter(<Shop />);
-        });
-
-        expect(screen.getAllByRole("status")).toHaveLength(16);
-    });
-
-    test("renders the product card after receiving data", async () => {
-        const mockData = [
+    let mockAPIData: APIData[];
+    let mockProductData: ProductData[];
+    beforeEach(() => {
+        mockAPIData = [
             {
                 id: 4,
                 title: "Handmade Fresh Table",
@@ -166,9 +168,41 @@ describe("Shop tests", () => {
             },
         ];
 
-        (fetch as jest.Mock).mockResolvedValue(createFetchResponse(mockData));
+        mockProductData = Array.isArray(mockAPIData)
+            ? mockAPIData.map((product: ProductData) => ({
+                  id: product.id,
+                  title: product.title,
+                  price: product.price,
+                  description: product.description,
+                  images: [...product.images],
+              }))
+            : [];
+    });
+
+    afterEach(cleanup);
+
+    test("renders without crashing", () => {
+        (fetch as jest.Mock).mockResolvedValue(createFetchResponse({}));
         act(() => {
-            renderWithRouter(<Shop />);
+            renderWithRouter(<Shop productData={[]} />);
+        });
+    });
+
+    test("renders a loading indicator if fetch is in progress", () => {
+        (fetch as jest.Mock).mockResolvedValue(createFetchResponse({}));
+        act(() => {
+            renderWithRouter(<Shop productData={[]} />);
+        });
+
+        expect(screen.getAllByRole("status")).toHaveLength(16);
+    });
+
+    test("renders the product card after receiving data", async () => {
+        (fetch as jest.Mock).mockResolvedValue(
+            createFetchResponse(mockAPIData)
+        );
+        act(() => {
+            renderWithRouter(<App />, { route: "/shop" });
         });
 
         const productImage = await screen.findByAltText(
