@@ -66,6 +66,20 @@ function App() {
             (product) => id === product.id
         ) as ProductData;
 
+        const indexOfItemToUpdate = bagContents.findIndex(
+            (content) => id === content.id
+        );
+        if (indexOfItemToUpdate !== -1) {
+            setBagContents((prevBagContents) => {
+                return prevBagContents.map((content, i) => {
+                    if (indexOfItemToUpdate === i) {
+                        return { ...content, quantity: content.quantity + 1 };
+                    } else {
+                        return content;
+                    }
+                });
+            });
+        } else {
             setBagContents((prevBagContents) =>
                 prevBagContents.concat([
                     {
@@ -76,6 +90,7 @@ function App() {
                     },
                 ])
             );
+        }
     };
 
     return (
