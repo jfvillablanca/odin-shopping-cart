@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import SpinnerImg from "../assets/spinner.svg";
+import AddToBag from "../assets/AddToBag";
 
 type ProductData = {
     id: string | number;
@@ -71,6 +72,9 @@ function ProductCard({
             <img src={imgsrc} alt={description} />
             <h2>{title}</h2>
             <h3>{price ? `$ ${price}` : " "}</h3>
+            <div role='button' aria-label={`add ${title} to bag`}>
+                <AddToBag />
+            </div>
         </div>
     );
 }
