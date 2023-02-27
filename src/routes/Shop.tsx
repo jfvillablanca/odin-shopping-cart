@@ -3,7 +3,7 @@ import SpinnerImg from "../assets/spinner.svg";
 import AddToBag from "../assets/AddToBag";
 
 type ProductData = {
-    id: string | number;
+    id: string;
     title: string;
     price: string | number;
     description: string;
@@ -48,11 +48,12 @@ function Shop({ productData }: { productData: ProductData[] }) {
 export default Shop;
 
 type ProductCardType = {
-    id?: string;
+    id: string;
     imgsrc?: string;
     title?: string;
     price?: string | number;
     description?: string;
+    handleAddToBag: (id: string) => void;
 };
 
 function ProductCard({
