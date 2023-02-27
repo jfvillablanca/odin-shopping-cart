@@ -25,6 +25,7 @@ type ItemInCheckout = {
 
 function App() {
     const [isBagOpen, setIsBagOpen] = useState(false);
+    const [bagContents, setBagContents] = useState<ItemInCheckout[]>([]);
     const [productData, setProductData] = useState<ProductData[]>([]);
 
     useEffect(() => {
@@ -69,7 +70,7 @@ function App() {
                         sidebar={
                             <ShoppingBagSidebar
                                 isBagOpen={isBagOpen}
-                                bagContents={[]}
+                                bagContents={bagContents}
                             />
                         }
                         handleBagIconClick={handleBagIconClick}
