@@ -264,4 +264,51 @@ describe("Shop tests", () => {
         expect(addToBag2).toBeInTheDocument();
         expect(addToBag2).toHaveAttribute("role", "button");
     });
+
+    test("adding two products to bag displays correct bag info", async () => {
+        (fetch as jest.Mock).mockResolvedValue(
+            createFetchResponse(mockAPIData)
+        );
+        act(() => {
+            renderWithRouter(<App />, { route: "/shop" });
+        });
+
+        const product1 = mockProductData[0];
+        const product2 = mockProductData[1];
+        const addToBag1 = await screen.findByLabelText(
+            new RegExp(`add ${product1.title} to bag`, "i")
+        );
+        const addToBag2 = await screen.findByLabelText(
+            new RegExp(`add ${product2.title} to bag`, "i")
+        );
+
+        const shoppingBagIcon = screen.getByLabelText("Shopping Bag");
+        const checkoutTotal = screen.getByLabelText("Checkout Total");
+
+        const user = userEvent.setup();
+        await user.click(shoppingBagIcon);
+        await user.click(addToBag1);
+        await user.click(addToBag2);
+
+        const itemsInBag = await screen.findAllByRole("listitem", {
+            name: /bag-item/i,
+        });
+
+        expect(itemsInBag).toHaveLength(2);
+        itemsInBag.forEach((item, index) => {
+            const { title, price } = mockProductData[index];
+            const titleElement = item.querySelector(".title");
+            const quantityElement = item.querySelector(".quantity");
+            const priceElement = item.querySelector(".price");
+            const subtotalElement = item.querySelector(".subtotal");
+
+            expect(titleElement).toHaveTextContent(title);
+            expect(priceElement).toHaveTextContent(`${price}`);
+            expect(quantityElement).toHaveTextContent("1");
+            expect(subtotalElement).toHaveTextContent(`${1 * +price}`);
+        });
+        expect(checkoutTotal).toContainHTML(
+            `$ ${(+product1.price + +product2.price).toFixed(2)}`
+        );
+    });
 });
