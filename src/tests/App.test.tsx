@@ -215,7 +215,7 @@ describe("Shop tests", () => {
 
     test("renders the product card after receiving data", async () => {
         (fetch as jest.Mock).mockResolvedValue(
-            createFetchResponse(mockAPIData)
+            createFetchResponse(mockAPIData.slice(0, 1))
         );
         act(() => {
             renderWithRouter(<App />, { route: "/shop" });
