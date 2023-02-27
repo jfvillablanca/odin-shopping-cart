@@ -166,6 +166,22 @@ describe("Shop tests", () => {
                     "https://placeimg.com/640/480/any?r=0.8807778235430017",
                 ],
             },
+            {
+                id: 2,
+                title: "Eloquent Monkey Wrench",
+                price: 486,
+                description: "Monkey ooh ohh ahh ahh",
+                category: {
+                    id: 5,
+                    name: "Others",
+                    image: "https://placeimg.com/640/480/any?r=0.591926261873231",
+                },
+                images: [
+                    "https://placeimg.com/640/480/any?r=0.9178516507833767",
+                    "https://placeimg.com/640/480/any?r=0.9300320592588625",
+                    "https://placeimg.com/640/480/any?r=0.8807778235430017",
+                ],
+            },
         ];
 
         mockProductData = Array.isArray(mockAPIData)
