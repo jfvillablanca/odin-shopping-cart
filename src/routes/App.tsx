@@ -61,6 +61,23 @@ function App() {
     const handleBagIconClick = () =>
         setIsBagOpen((prevIsBagOpen) => !prevIsBagOpen);
 
+    const handleAddToBag = (id: string) => {
+        const itemForCheckout: ProductData = productData.find(
+            (product) => id === product.id
+        ) as ProductData;
+
+            setBagContents((prevBagContents) =>
+                prevBagContents.concat([
+                    {
+                        id: itemForCheckout.id,
+                        title: itemForCheckout.title,
+                        quantity: 1,
+                        price: +itemForCheckout.price,
+                    },
+                ])
+            );
+    };
+
     return (
         <Routes>
             <Route
