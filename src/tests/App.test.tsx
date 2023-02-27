@@ -118,7 +118,7 @@ describe("App tests", () => {
 
 describe("Nav tests", () => {
     test("renders without crashing", () => {
-        renderWithRouter(<Nav handleClick={() => void 0} />);
+        renderWithRouter(<Nav handleClick={() => void 0} numOfItemsInBag={0}/>);
     });
 });
 
