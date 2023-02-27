@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "../styles/App.css";
@@ -39,7 +40,7 @@ function App() {
                         data
                     )
                         ? data.map((product: ProductData) => ({
-                              id: product.id,
+                              id: product.id + nanoid(),
                               title: product.title,
                               price: product.price,
                               description: product.description,
