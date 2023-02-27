@@ -235,4 +235,29 @@ describe("Shop tests", () => {
         expect(productPrice).toBeInTheDocument();
         expect(productCards).toHaveLength(1);
     });
+
+    test("every product card has an add to bag button", async () => {
+        (fetch as jest.Mock).mockResolvedValue(
+            createFetchResponse(mockAPIData)
+        );
+        act(() => {
+            renderWithRouter(<App />, { route: "/shop" });
+        });
+
+        const productName1 = mockProductData[0].title;
+        const productName2 = mockProductData[1].title;
+        const productCards = await screen.findAllByRole("article");
+        const addToBag1 = await screen.findByLabelText(
+            new RegExp(`add ${productName1} to bag`, "i")
+        );
+        const addToBag2 = await screen.findByLabelText(
+            new RegExp(`add ${productName2} to bag`, "i")
+        );
+
+        expect(productCards).toHaveLength(2);
+        expect(addToBag1).toBeInTheDocument();
+        expect(addToBag1).toHaveAttribute("role", "button");
+        expect(addToBag2).toBeInTheDocument();
+        expect(addToBag2).toHaveAttribute("role", "button");
+    });
 });
