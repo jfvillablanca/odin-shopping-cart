@@ -105,6 +105,7 @@ function App() {
                                 bagContents={bagContents}
                             />
                         }
+                        numOfItemsInBag={bagContents.reduce((total, cur) => total + cur.quantity, 0)}
                         handleBagIconClick={handleBagIconClick}
                     />
                 }
