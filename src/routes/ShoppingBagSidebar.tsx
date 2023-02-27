@@ -18,6 +18,7 @@ function ShoppingBagSidebar({
                 <h3 className="title">{item.title}</h3>
                 <h3 className="quantity">{item.quantity}</h3>
                 <h3 className="price">{(item.price).toFixed(2)}</h3>
+                <h3 className="subtotal">{(item.quantity * item.price).toFixed(2)}</h3>
             </div>
         );
     });
