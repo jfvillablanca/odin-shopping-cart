@@ -113,7 +113,12 @@ function App() {
                 <Route path='home' element={<Home />} />
                 <Route
                     path='shop'
-                    element={<Shop productData={productData} />}
+                    element={
+                        <Shop
+                            productData={productData}
+                            handleAddToBag={handleAddToBag}
+                        />
+                    }
                 />
                 <Route path='*' element={<NoMatch />} />
             </Route>
