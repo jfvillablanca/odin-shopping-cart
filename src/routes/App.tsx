@@ -8,11 +8,18 @@ import Shop from "./Shop";
 import ShoppingBagSidebar from "./ShoppingBagSidebar";
 
 type ProductData = {
-    id: string | number;
+    id: string;
     title: string;
     price: string | number;
     description: string;
     images: string[];
+};
+
+type ItemInCheckout = {
+    id: string;
+    title: string;
+    quantity: number;
+    price: number;
 };
 
 function App() {
