@@ -14,10 +14,10 @@ function ShoppingBagSidebar({
 }) {
     const checkoutItems = bagContents.map((item) => {
         return (
-            <div className='flex' key={item.id}>
-                <h3>{item.title}</h3>
-                <h3>{item.quantity}</h3>
-                <h3>{item.price}</h3>
+            <div role="listitem" aria-label="bag-item" className='flex' key={item.id}>
+                <h3 className="title">{item.title}</h3>
+                <h3 className="quantity">{item.quantity}</h3>
+                <h3 className="price">{(item.price).toFixed(2)}</h3>
             </div>
         );
     });
@@ -35,7 +35,7 @@ function ShoppingBagSidebar({
             hidden={!isBagOpen}
         >
             {bagContents.length === 0 && <h2>Your bag is empty</h2>}
-            <div className='flex flex-col'>
+            <div role="list" className='flex flex-col'>
                 {checkoutItems}
                 <h2 aria-label='Checkout Total'>
                     Checkout Total: $ {`${checkoutTotal.toFixed(2)}`}
