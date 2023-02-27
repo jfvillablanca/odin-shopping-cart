@@ -200,14 +200,18 @@ describe("Shop tests", () => {
     test("renders without crashing", () => {
         (fetch as jest.Mock).mockResolvedValue(createFetchResponse({}));
         act(() => {
-            renderWithRouter(<Shop productData={[]} />);
+            renderWithRouter(
+                <Shop productData={[]} handleAddToBag={() => void 0} />
+            );
         });
     });
 
     test("renders a loading indicator if fetch is in progress", () => {
         (fetch as jest.Mock).mockResolvedValue(createFetchResponse({}));
         act(() => {
-            renderWithRouter(<Shop productData={[]} />);
+            renderWithRouter(
+                <Shop productData={[]} handleAddToBag={() => void 0} />
+            );
         });
 
         expect(screen.getAllByRole("status")).toHaveLength(16);
